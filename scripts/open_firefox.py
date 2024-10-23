@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.chrome import GeckoDriverManager
 
 # Initialize the Chrome WebDriver using WebDriver Manager
 service = Service(ChromeDriverManager().install())
