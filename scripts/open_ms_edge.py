@@ -1,12 +1,12 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import EdgeDriverManager
+from selenium.webdriver.edge.service import Service
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-# Initialize the Chrome WebDriver using WebDriver Manager
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+# Initialize the Edge WebDriver using WebDriver Manager
+service = Service(EdgeChromiumDriverManager().install())
+driver = webdriver.Edge(service=service)
 
-# Open Google site
+# Open Google
 driver.get("https://www.google.com")
 
 # Print the page title

@@ -1,9 +1,10 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 
-# This only works for macOS platforms.
-
-# Initialize the Safari WebDriver (SafariDriver is pre-installed on macOS)
-driver = webdriver.Safari()
+# Initialize the Firefox WebDriver using WebDriver Manager
+service = Service(GeckoDriverManager().install())
+driver = webdriver.Firefox(service=service)
 
 # Open Google
 driver.get("https://www.google.com")
@@ -13,4 +14,3 @@ print("Page Title:", driver.title)
 
 # Close the browser
 driver.quit()
-
