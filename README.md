@@ -1,6 +1,12 @@
 # automation-journey
 
-This repository is a learning journey to explore Selenium for web automation using Python. The project includes examples, scripts, and documentation aimed at mastering Selenium step-by-step.
+This repository serves as my learning journey to explore Selenium for web automation using Python. The project includes examples, scripts, and documentation aimed at mastering Selenium step-by-step.
+
+## Learning Goals
+- Understand web automation with Selenium.
+- Automate browser actions like searching, interacting with elements, and handling alerts.
+- Learn how to use different element locators in Selenium.
+- Practice handling waits and dealing with dynamic content.
 
 ## Project Structure
 - **scripts/**: Python scripts for different Selenium tasks.
@@ -11,7 +17,7 @@ This repository is a learning journey to explore Selenium for web automation usi
 ## How to Set Up
 1. Clone the repository.
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/frostytm90/automation-journey.git
     cd automation-journey
     ```
 2. Create and activate a virtual environment.
@@ -34,14 +40,8 @@ To use Selenium, WebDriver Manager can be used to automatically download the app
 3. **Edge** - EdgeDriver (latest stable release)
 4. **Safari** (macOS only, pre-installed)
 
-## Learning Goals
-- Understand web automation with Selenium.
-- Automate browser actions like searching, interacting with elements, and handling alerts.
-- Learn how to use different element locators in Selenium.
-- Practice handling waits and dealing with dynamic content.
-
 ## Example Automation: Google Search
-We have enhanced our scripts to include automation examples like performing a Google search.
+I've enhanced the example script to include automation example like performing a Google search.
 
 - **Script**: `scripts/search_google_chrome.py`
   - The script opens Google, searches for the term "Selenium Python", and prints the title of the results page.
