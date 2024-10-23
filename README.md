@@ -40,6 +40,29 @@ To use Selenium, WebDriver Manager can be used to automatically download the app
 3. **Edge** - EdgeDriver (latest stable release)
 4. **Safari** (macOS only, pre-installed)
 
+## Example Automation: Open Google Chrome Browser
+I created the following example to automate the open of Google Chrome
+
+**Example Code**
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+# Initialize the Chrome WebDriver using WebDriver Manager
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+
+# Open Google site
+driver.get("https://www.google.com")
+
+# Print the page title
+print("Page Title:", driver.title)
+
+# Close the browser
+driver.quit()
+```
+
 ## Example Automation: Google Search
 I've enhanced the example script to include automation example like performing a Google search.
 
