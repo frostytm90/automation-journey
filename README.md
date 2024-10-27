@@ -1,26 +1,26 @@
-# automation-journey
+# Selenium Automation Journey
 
-This repository serves as my learning journey to explore Selenium for web automation using Python. The project includes examples, scripts, and documentation aimed at mastering Selenium step-by-step.
+This repository documents my journey in learning Selenium for web automation using Python. You'll find scripts, examples, and some notes that helped me master Selenium step by step.
 
 ## Learning Goals
-- Understand web automation with Selenium.
+- Understand the basics of web automation with Selenium.
 - Automate browser actions like searching, interacting with elements, and handling alerts.
 - Learn how to use different element locators in Selenium.
-- Practice handling waits and dealing with dynamic content.
+- Practice handling waits and dynamic content.
 
 ## Project Structure
-- **scripts/**: Python scripts for different Selenium tasks.
-- **drivers/**: Optional: Web drivers for different browsers.
-- **docs/**: Detailed documentation of the learning process.
-- **README.md**: Overview and learning path.
+- **scripts/**: Python scripts for various Selenium tasks.
+- **drivers/**: Optional web drivers for different browsers.
+- **docs/**: Documentation of my learning journey.
+- **README.md**: Overview and learning path (this file!).
 
-## How to Set Up
-1. Clone the repository.
+## Setting Up
+1. Clone the repository:
     ```bash
     git clone https://github.com/frostytm90/automation-journey.git
     cd automation-journey
     ```
-2. Create and activate a virtual environment.
+2. Create and activate a virtual environment:
     ```bash
     python -m venv selenium-env
     ```
@@ -32,31 +32,30 @@ This repository serves as my learning journey to explore Selenium for web automa
     ```
 
 ## Getting Web Drivers
-To use Selenium, WebDriver Manager can be used to automatically download the appropriate web driver for your browser.
+To use Selenium, you'll need the appropriate web driver for your browser. I use **WebDriver Manager** to automatically download the required driver.
 
-### Supported Browsers:
-1. **Chrome** - ChromeDriver (latest stable release)
-2. **Firefox** - GeckoDriver (latest stable release)
-3. **Edge** - EdgeDriver (latest stable release)
-4. **Safari** (macOS only, pre-installed)
+### Supported Browsers
+- **Chrome** - ChromeDriver (latest stable release)
+- **Firefox** - GeckoDriver (latest stable release)
+- **Edge** - EdgeDriver (latest stable release)
+- **Safari** - Pre-installed on macOS
 
-## Example Automation: Open Google Chrome Browser
-I went ahead and created this automation script to open the Google Chrome Browser
+## Example Automation Scripts
+
+### 1. Opening Google Chrome
+A simple script to open Google Chrome and print the page title.
 
 - **Script**: `scripts/open_google_chrome.py`
-  - The script opens up Google Chrome Browser and prints out the Page Title
 
-**Example Code**:
 ```python
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-# Initialize the Chrome WebDriver using WebDriver Manager
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
 
-# Open Google site
+# Open Google
 driver.get("https://www.google.com")
 
 # Print the page title
@@ -66,13 +65,10 @@ print("Page Title:", driver.title)
 driver.quit()
 ```
 
-## Example Automation: Google Search
-I've enhanced the example script to include automation example like performing a Google search.
+### 2. Google Search Automation
+An enhanced script that opens Google and searches for "Selenium Python".
 
 - **Script**: `scripts/search_google_chrome.py`
-  - The script opens Google, searches for the term "Selenium Python", and prints the title of the results page.
-
-**Example Code**:
 
 ```python
 from selenium import webdriver
@@ -81,143 +77,108 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 
-# Initialize the Chrome WebDriver using WebDriver Manager
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
 
 # Open Google
 driver.get("https://www.google.com")
 
-# Find the search bar using its name attribute value
+# Find the search bar and search for "Selenium Python"
 search_box = driver.find_element(By.NAME, "q")
-
-# Send a search term to the search box and press enter
 search_box.send_keys("Selenium Python")
 search_box.send_keys(Keys.RETURN)
 
-# Wait for the results to load and print the title
+# Wait for results and print the title
 driver.implicitly_wait(5)
 print("Page Title After Search:", driver.title)
 
 # Close the browser
 driver.quit()
+```
 
-## Example Automation: Cookie Clicker Bot
+### 3. Automating Cookie Clicker Game
+A more advanced script to automate playing **Cookie Clicker** — clicking the cookie and buying upgrades.
 
-In addition to the simple browser actions and search automation scripts, I developed a more advanced automation script to play **Cookie Clicker**, an incremental game that requires clicking a large cookie to generate cookies and using them to buy upgrades.
+- **Script**: `scripts/automate_cookie_clicker.py`
 
-- **Script**: `scripts/automate_cookie_clicker.py`  
-  The script automates clicking the cookie in the game and purchasing upgrades to improve the cookie generation rate.
+#### How It Works
 
-### How the Cookie Clicker Automation Works
+1. **Setting Up the WebDriver**
+   - Uses `webdriver-manager` to automatically set up ChromeDriver.
 
-This script is built using **Python** and **Selenium** to automate the gameplay for **Cookie Clicker**. Below, I provide a detailed explanation of what the script does and how it accomplishes the task of playing the game:
+   ```python
+   from selenium import webdriver
+   from selenium.webdriver.chrome.service import Service
+   from webdriver_manager.chrome import ChromeDriverManager
 
-1. **Setting Up the WebDriver**:
-    - The script uses `webdriver-manager` to automatically handle the ChromeDriver setup, ensuring compatibility between the Chrome browser and the driver:
-    
-    ```python
-    from selenium import webdriver
-    from selenium.webdriver.chrome.service import Service
-    from webdriver_manager.chrome import ChromeDriverManager
+   service = Service(ChromeDriverManager().install())
+   driver = webdriver.Chrome(service=service)
+   ```
 
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
-    ```
+2. **Navigating to Cookie Clicker**
+   - The game is hosted at `https://orteil.dashnet.org/cookieclicker/`.
 
-2. **Navigating to the Game**:
-    - The game is hosted at `https://orteil.dashnet.org/cookieclicker/`, and the script navigates to this URL:
-    
-    ```python
-    driver.get("https://orteil.dashnet.org/cookieclicker/")
-    ```
+   ```python
+   driver.get("https://orteil.dashnet.org/cookieclicker/")
+   ```
 
-3. **Language Selection**:
-    - On the first load, the game requires the user to choose a language. The script selects English by locating and clicking the appropriate button:
-    
-    ```python
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
+3. **Language Selection**
+   - The script selects **English** at the start.
 
-    # Wait until the language selection element is available and select "English"
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'English')]"))
-    )
-    language = driver.find_element(By.XPATH, "//*[contains(text(), 'English')]")
-    language.click()
-    ```
+   ```python
+   from selenium.webdriver.common.by import By
+   from selenium.webdriver.support.ui import WebDriverWait
+   from selenium.webdriver.support import expected_conditions as EC
 
-4. **Clicking the Main Cookie**:
-    - The script locates the main cookie element by its ID (`bigCookie`) and then clicks it continuously to accumulate cookies:
-    
-    ```python
-    cookie = driver.find_element(By.ID, "bigCookie")
-    while True:
-        cookie.click()
-    ```
+   WebDriverWait(driver, 5).until(
+       EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'English')]"))
+   )
+   language = driver.find_element(By.XPATH, "//*[contains(text(), 'English')]")
+   language.click()
+   ```
 
-5. **Purchasing Upgrades**:
-    - The main goal is to increase the cookie production rate, which can be done by purchasing upgrades. The script monitors the cookie count and checks if enough cookies are available to buy the cheapest upgrade:
-    
-    ```python
-    cookies_count = driver.find_element(By.ID, "cookies").text.split(" ")[0]
-    cookies_count = int(cookies_count.replace(",", ""))  # Remove commas and convert to integer
+4. **Clicking the Big Cookie**
+   - Continuously clicks the main cookie (`bigCookie`).
 
-    for i in range(4):
-        product_price = driver.find_element(By.ID, "productPrice" + str(i)).text.replace(",", "")
+   ```python
+   cookie = driver.find_element(By.ID, "bigCookie")
+   while True:
+       cookie.click()
+   ```
 
-        if not product_price.isdigit():
-            continue
+5. **Buying Upgrades**
+   - Checks for upgrades and buys them when enough cookies are available.
 
-        product_price = int(product_price)
-        
-        if cookies_count >= product_price:
-            product = driver.find_element(By.ID, "product" + str(i))
-            product.click()
-            break
-    ```
+   ```python
+   cookies_count = driver.find_element(By.ID, "cookies").text.split(" ")[0]
+   cookies_count = int(cookies_count.replace(",", ""))
 
-### Key Concepts and Techniques Used
+   for i in range(4):
+       product_price = driver.find_element(By.ID, "productPrice" + str(i)).text.replace(",", "")
 
-1. **WebDriver Manager**:
-   - **`webdriver_manager`** is used to automatically manage ChromeDriver. This eliminates the hassle of manually downloading and ensuring the driver version matches the installed Chrome version.
+       if not product_price.isdigit():
+           continue
 
-2. **Explicit Waits**:
-   - The script uses explicit waits (`WebDriverWait`) to ensure elements are loaded before interacting with them. This is crucial for dealing with dynamic content and ensuring stable automation.
-
-3. **Element Locators**:
-   - **ID Locator**: Used to locate the main cookie button (`bigCookie`) and cookie count (`cookies`).
-   - **XPath**: Used to locate the language selection button (`English`). XPath helps find elements with specific text.
-
-4. **Automation Loop**:
-   - The script runs an infinite loop to continuously click the main cookie and periodically check if there are enough cookies to buy upgrades. This is a typical pattern in automation where a specific task must be repeated indefinitely.
-
-5. **Handling Dynamic Prices**:
-   - The prices of products (upgrades) are retrieved dynamically. The script checks if the player has enough cookies and then clicks the appropriate product to purchase it.
+       product_price = int(product_price)
+       
+       if cookies_count >= product_price:
+           product = driver.find_element(By.ID, "product" + str(i))
+           product.click()
+           break
+   ```
 
 ### Running the Script
 
-1. **Prerequisites**:
-   - Install the required packages:
-     ```bash
-     pip install selenium webdriver-manager
-     ```
-   - Ensure you have Google Chrome installed.
+1. **Install the Requirements**
+   ```bash
+   pip install selenium webdriver-manager
+   ```
 
-2. **Execute the Script**:
-   - Run the Python script:
-     ```bash
-     python scripts/automate_cookie_clicker.py
-     ```
+2. **Run the Script**
+   ```bash
+   python scripts/automate_cookie_clicker.py
+   ```
 
-### Note
-- **Infinite Loop**: The script runs indefinitely to click the cookie and purchase upgrades. You can stop the script manually by interrupting it (e.g., pressing `Ctrl+C` in the terminal).
-- **Browser Control**: The script takes control of your Chrome browser. You can watch as it clicks the cookie and buys upgrades in real-time.
-
-### Conclusion
-
-This automation project is a fun way to practice Selenium skills, such as locating elements, handling waits, and interacting with dynamic content. By automating **Cookie Clicker**, I gained a deeper understanding of Selenium and how to automate repetitive tasks in a game environment.
-
-Feel free to check out the script in the repository under `scripts/automate_cookie_clicker.py` and modify it to improve its efficiency or add more advanced features!
-
+### Notes
+- The script runs in an infinite loop, so you'll need to stop it manually (e.g., `Ctrl+C` in the terminal).
+- The browser is fully controlled by the script, so you can watch the automation in action.
