@@ -33,3 +33,4 @@ try:
 finally:
     # Step 7: Close the browser
     driver.quit()
+  
